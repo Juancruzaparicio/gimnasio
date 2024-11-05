@@ -64,16 +64,21 @@ class Cliente{
         return $this->mail;
     }
 
-    public function setMail(int $mail_){
+    public function setMail(string $mail_){
         $this->mail=$mail_;
     }
 
-    public function getFecha_nacimiento() : ?DateTime{
+    public function getFecha_nacimiento() : ?string{
         return $this->fecha_nacimiento;
     }
 
-    public function setFecha_nacimiento(string $fecha_nacimiento_){
-        $this->fecha_nacimiento = DateTime::createFromFormat('Y-m-d', $fecha_nacimiento_);
+    public function setFecha_nacimiento(?string $fecha_nacimiento_){
+        if($fecha_nacimiento_){ 
+            $f = explode('-', $fecha_nacimiento_);
+            $this->fecha_nacimiento = $f[2]."-".$f[0]."-".$f[1];
+        }else {
+            $this->fecha_nacimiento = null;  // Si es null, lo almacena como null
+        }
     }
 
     public function getDireccion() : ?string{
@@ -84,12 +89,17 @@ class Cliente{
         $this->direccion=$direccion_;
     }
 
-    public function getFecha_inscripcion() : ?DateTime{
+    public function getFecha_inscripcion() : ?string{
         return $this->fecha_inscripcion;
     }
 
     public function setFecha_inscripcion(string $fecha_inscripcion_){
-        $this->fecha_inscripcion = DateTime::createFromFormat('Y-m-d', $fecha_inscripcion_);
+        if($fecha_inscripcion_){ 
+            $f = explode('-', $fecha_inscripcion_);
+            $this->fecha_inscripcion = $f[2]."-".$f[0]."-".$f[1];
+        }else {
+            $this->fecha_inscripcion = null;  // Si es null, lo almacena como null
+        }
     }
 
     public function getId_plan() : ?int{
@@ -123,6 +133,31 @@ class Cliente{
             $consulta=$this->pdo->prepare("SELECT * FROM clientes;");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function InsertarCliente(Cliente $p){
+        try{
+            $consulta=$this->pdo->prepare("INSERT INTO clientes(id_cliente,dni,nombre,apellido,telefono,mail,fecha_nacimiento,direccion,fecha_inscripcion,id_plan,estado) 
+            VALUES (?,?,?,?,?,?,?,?,?,?,?);");
+            $consulta->execute(array(
+                $p->getId_cliente(),
+                $p->getDni(),
+                $p->getNombre(),
+                $p->getApellido(),
+                $p->getTelefono(),
+                $p->getMail(),
+                $p->getFecha_nacimiento(),
+                $p->getDireccion(),
+                $p->getFecha_inscripcion(),
+                $p->getId_plan(),
+                $p->getEstado()
+                
+
+            ));
+
         }catch(Exception $e){
             die($e->getMessage());
         }
