@@ -212,6 +212,25 @@
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Entrenadores
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="?c=pago" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Pagos
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="?c=plan" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Planes
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>

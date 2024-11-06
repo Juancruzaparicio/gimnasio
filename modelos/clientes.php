@@ -74,8 +74,7 @@ class Cliente{
 
     public function setFecha_nacimiento(?string $fecha_nacimiento_){
         if($fecha_nacimiento_){ 
-            $f = explode('-', $fecha_nacimiento_);
-            $this->fecha_nacimiento = $f[2]."-".$f[0]."-".$f[1];
+            $this->fecha_nacimiento=$fecha_nacimiento_;
         }else {
             $this->fecha_nacimiento = null;  // Si es null, lo almacena como null
         }
@@ -95,8 +94,7 @@ class Cliente{
 
     public function setFecha_inscripcion(string $fecha_inscripcion_){
         if($fecha_inscripcion_){ 
-            $f = explode('-', $fecha_inscripcion_);
-            $this->fecha_inscripcion = $f[2]."-".$f[0]."-".$f[1];
+            $this->fecha_inscripcion=$fecha_inscripcion_;
         }else {
             $this->fecha_inscripcion = null;  // Si es null, lo almacena como null
         }
