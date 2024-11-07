@@ -26,52 +26,52 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Registrar Clientes:</h3>
+                <h3 class="card-title"><?=$titulo?> Clientes:</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form method="POST" action="?c=cliente&a=GuardarCliente">
                 <div class="card-body">
                   <div class="form-group">
-                    <input type="hidden" class="form-control" name="id">
+                    <input type="hidden" class="form-control" name="id" value="<?=$p->getId_cliente()?>">
                     <label for="dni_cliente">DNI</label>
-                    <input required type="number" class="form-control" name="dni_cliente" placeholder="DNI">
+                    <input required type="number" class="form-control" name="dni_cliente" placeholder="DNI" value="<?=$p->getDni()?>">
                   </div>
                   <div class="form-group">
                     <label for="nombre_cliente">Nombre</label>
-                    <input required type="text" class="form-control" name="nombre_cliente" placeholder="Nombre">
+                    <input required type="text" class="form-control" name="nombre_cliente" placeholder="Nombre" value="<?=$p->getNombre()?>">
                   </div>
                   <div class="form-group">
                     <label for="apellido_cliente">Apellido</label>
-                    <input required type="text" class="form-control" name="apellido_cliente" placeholder="Apellido">
+                    <input required type="text" class="form-control" name="apellido_cliente" placeholder="Apellido" value="<?=$p->getApellido()?>">
                   </div>
                   <div class="form-group">
                     <label for="telefono_cliente">Telefono</label>
-                    <input required type="number" class="form-control" name="telefono_cliente" placeholder="Telefono">
+                    <input required type="number" class="form-control" name="telefono_cliente" placeholder="Telefono" value="<?=$p->getTelefono()?>">
                   </div>
                   <div class="form-group">
                     <label for="mail_cliente">Mail</label>
-                    <input required type="text" class="form-control" name="mail_cliente" placeholder="Mail">
+                    <input required type="text" class="form-control" name="mail_cliente" placeholder="Mail" value="<?=$p->getMail()?>">
                   </div>
                   <div class="form-group">
                     <label for="fecha_nacimiento_cliente">Fecha de Nacimiento</label>
-                    <input type="text" class="form-control" name="fecha_nacimiento_cliente" placeholder="yyyy-mm-dd">
+                    <input type="text" class="form-control" name="fecha_nacimiento_cliente" placeholder="yyyy-mm-dd" value="<?=$p->getFecha_nacimiento()?>">
                   </div>
                   <div class="form-group">
                     <label for="direccion_cliente">Direccion</label>
-                    <input required type="text" class="form-control" name="direccion_cliente" placeholder="Direccion">
+                    <input required type="text" class="form-control" name="direccion_cliente" placeholder="Direccion" value="<?=$p->getDireccion()?>">
                   </div>
                   <div class="form-group">
                     <label for="fecha_inscripcion_cliente">Fecha de inscripcion</label>
-                    <input type="text" class="form-control" name="fecha_inscripcion_cliente" placeholder="Fecha de inscripcion">
+                    <input type="text" class="form-control" name="fecha_inscripcion_cliente" placeholder="Fecha de inscripcion" value="<?=$p->getFecha_inscripcion()?>">
                   </div>
                   <div class="form-group">
                     <label for="id_plan_cliente">Plan</label>
-                    <input required type="number" class="form-control" name="id_plan_cliente" placeholder="Plan">
+                    <input required type="number" class="form-control" name="id_plan_cliente" placeholder="Plan" value="<?=$p->getId_plan()?>">
                   </div>
                   <div class="form-group">
                     <label for="estado_cliente">Estado</label>
-                    <input required type="text" class="form-control" name="estado_cliente" placeholder="Estado">
+                    <input required type="text" class="form-control" name="estado_cliente" placeholder="Estado" value="<?=$p->getEstado()?>">
                   </div>
                 </div>
                 <!-- /.card-body -->

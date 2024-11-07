@@ -59,8 +59,12 @@
                     <td><?=$r->fecha_inscripcion?></td>
                     <td><?=$r->id_plan?></td>
                     <td><?=$r->estado?></td>
-                    <td><button type="button" class="btn btn-block bg-gradient-primary btn-sm">Editar</button>
-                    <button type="button" class="btn btn-block bg-gradient-danger btn-xs">Eliminar</button></td>
+                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=cliente&a=FormCrearClientes&id=<?=$r->id_cliente?>">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-block bg-gradient-primary btn-sm" href="?c=cliente&a=BorrarCliente&id=<?=$r->id_cliente?>">
+                          <i class="fas fa-trash"></i>
+                        </a>
                   </tr>
                   <?php endforeach;?>
                   <a class="btn btn-app" href="?c=cliente&a=FormCrearClientes">

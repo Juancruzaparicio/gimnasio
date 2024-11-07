@@ -160,4 +160,73 @@ class Cliente{
             die($e->getMessage());
         }
     }
+
+    public function Obtener($id){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM clientes WHERE id_cliente = ?;");
+            $consulta->execute(array($id));
+            $r=$consulta->fetch(PDO::FETCH_OBJ);
+            $p=new Cliente();
+            $p->setId_cliente($r->id_cliente);
+            $p->setDni($r->dni);
+            $p->setNombre($r->nombre);
+            $p->setApellido($r->apellido);
+            $p->setTelefono($r->telefono);
+            $p->setMail($r->mail);
+            $p->setFecha_nacimiento($r->fecha_nacimiento);
+            $p->setDireccion($r->direccion);
+            $p->setFecha_inscripcion($r->fecha_inscripcion);
+            $p->setId_plan($r->id_plan);
+            $p->setEstado($r->estado);
+
+            return $p;
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ActualizarCliente(Cliente $p){
+        try{
+            $consulta=$this->pdo->prepare("UPDATE clientes SET
+                dni=?,
+                nombre=?,
+                apellido=?,
+                telefono=?,
+                mail=?,
+                fecha_nacimiento=?,
+                direccion=?,
+                fecha_inscripcion=?,
+                id_plan=?,
+                estado=?
+                WHERE id_cliente=?;");
+            $consulta->execute(array(
+                $p->getDni(),
+                $p->getNombre(),
+                $p->getApellido(),
+                $p->getTelefono(),
+                $p->getMail(),
+                $p->getFecha_nacimiento(),
+                $p->getDireccion(),
+                $p->getFecha_inscripcion(),
+                $p->getId_plan(),
+                $p->getEstado(),
+                $p->getId_cliente()
+                
+
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function EliminarCliente($id){
+        try{
+            $consulta=$this->pdo->prepare("DELETE FROM clientes WHERE id_cliente=?;");
+            $consulta->execute(array($id));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
 }

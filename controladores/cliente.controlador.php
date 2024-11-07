@@ -17,6 +17,13 @@ class ClienteControlador{
     }
 
     public function FormCrearClientes(){
+        $titulo='Registrar';
+        $p= new Cliente();
+        if(isset($_GET['id'])){
+            $p=$this->modelo->Obtener($_GET['id']);
+            $titulo='Modificar';
+        }
+
         require_once "vistas/encabezado.php";
         require_once "vistas/clientes/form.php";
         require_once "vistas/pie.php";
@@ -36,8 +43,15 @@ class ClienteControlador{
         $p->setId_plan($_POST['id_plan_cliente']);
         $p->setEstado($_POST['estado_cliente']);
 
+        $p->getId_cliente() > 0 ?
+        $this->modelo->ActualizarCliente($p) :
         $this->modelo->InsertarCliente($p);
 
-        //header("location:?c=producto");
+        header("location:?c=cliente");
+    }
+
+    public function BorrarCliente(){
+        $this->modelo->EliminarCliente($_GET['id']);
+        header("location:?c=cliente");
     }
 }
