@@ -116,16 +116,6 @@ class Cliente{
         $this->estado=$estado_;
     }
 
-    public function Cantidad_clientes(){
-        try{
-            $consulta=$this->pdo->prepare("SELECT sum(id_plan) AS cantidad FROM clientes;");
-            $consulta->execute();
-            return $consulta->fetch(PDO::FETCH_OBJ);
-        }catch(Exception $e){
-            die($e->getMessage());
-        }
-    }
-
     public function Listar(){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM clientes;");

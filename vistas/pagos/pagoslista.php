@@ -5,12 +5,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Pagos</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Tabla Entrenadores</li>
+              <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+              <li class="breadcrumb-item active">Pagos</li>
             </ol>
           </div>
         </div>
@@ -23,10 +23,6 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Pagos</h3>
-              </div>
-              <!-- /.card-header -->
               <div class="card-body">
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
@@ -51,11 +47,15 @@
                     <td><?=$r->id_plan?></td>
                     <td><?=$r->estado_pago?></td>
                     <td><?=$r->fecha_pago?></td>
-                    <td><button type="button" class="btn btn-block bg-gradient-primary btn-sm">Editar</button>
-                    <button type="button" class="btn btn-block bg-gradient-danger btn-xs">Eliminar</button></td>
+                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=pago&a=FormCrearPago&id=<?=$r->id_pago?>">
+                          <i class="fas fa-edit"></i>
+                        </a>
+                        <a class="btn btn-block bg-gradient-primary btn-sm" href="?c=pago&a=BorrarPago&id=<?=$r->id_pago?>">
+                          <i class="fas fa-trash"></i>
+                        </a></td>
                   </tr>
                   <?php endforeach;?>
-                  <a class="btn btn-app">
+                  <a class="btn btn-app" href="?c=pago&a=FormCrearPago">
                   <i class="fas fa-plus"></i> Agregar</a>
                 </table>
               </div>

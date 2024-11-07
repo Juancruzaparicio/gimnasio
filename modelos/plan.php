@@ -81,4 +81,80 @@ class Plan{
             die($e->getMessage());
         }
     }
+
+    public function InsertarPlan(Plan $p){
+        try{
+            $consulta=$this->pdo->prepare("INSERT INTO plan_entrenamiento(id_plan,nombre,codigo,descripcion,duracion_semanas,cantidadsesiones_semana,id_entrenador) 
+            VALUES (?,?,?,?,?,?,?);");
+            $consulta->execute(array(
+                $p->getId_plan(),
+                $p->getNombre(),
+                $p->getCodigo(),
+                $p->getDescripcion(),
+                $p->getDuracion_semanas(),
+                $p->getCantidadsesiones_semana(),
+                $p->getId_entrenador()
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPlan($id){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM plan_entrenamiento WHERE id_plan = ?;");
+            $consulta->execute(array($id));
+            $r=$consulta->fetch(PDO::FETCH_OBJ);
+            $p=new Plan();
+            $p->setId_plan($r->id_plan);
+            $p->setNombre($r->nombre);
+            $p->setCodigo($r->codigo);
+            $p->setDescripcion($r->descripcion);
+            $p->setDuracion_semanas($r->duracion_semanas);
+            $p->setCantidadsesiones_semana($r->cantidadsesiones_semana);
+            $p->setId_entrenador($r->id_entrenador);
+
+            return $p;
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ActualizarPlan(Plan $p){
+        try{
+            $consulta=$this->pdo->prepare("UPDATE plan_entrenamiento SET
+                nombre=?,
+                codigo=?,
+                descripcion=?,
+                duracion_semanas=?,
+                cantidadsesiones_semana=?,
+                id_entrenador=?
+                WHERE id_plan=?;");
+            $consulta->execute(array(
+                $p->getNombre(),
+                $p->getCodigo(),
+                $p->getDescripcion(),
+                $p->getDuracion_semanas(),
+                $p->getCantidadsesiones_semana(),
+                $p->getId_entrenador(),
+                $p->getId_plan()
+                
+
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function EliminarPlan($id){
+        try{
+            $consulta=$this->pdo->prepare("DELETE FROM plan_entrenamiento WHERE id_plan=?;");
+            $consulta->execute(array($id));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
 }

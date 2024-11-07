@@ -81,4 +81,79 @@ class Pago{
             die($e->getMessage());
         }
     }
+
+    public function InsertarPago(pago $p){
+        try{
+            $consulta=$this->pdo->prepare("INSERT INTO pagos(id_pago,id_cliente,monto_pagado,metodo_pago,id_plan,estado_pago,fecha_pago) 
+            VALUES (?,?,?,?,?,?,?);");
+            $consulta->execute(array(
+                $p->getId_pago(),
+                $p->getId_cliente(),
+                $p->getMonto_pagado(),
+                $p->getMetodo_pago(),
+                $p->getId_plan(),
+                $p->getEstado_pago(),
+                $p->getFecha_pago(),
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPago($id){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM pagos WHERE id_pago = ?;");
+            $consulta->execute(array($id));
+            $r=$consulta->fetch(PDO::FETCH_OBJ);
+            $p=new Pago();
+            $p->setId_pago($r->id_pago);
+            $p->setId_cliente($r->id_cliente);
+            $p->setMonto_pagado($r->monto_pagado);
+            $p->setMetodo_pago($r->metodo_pago);
+            $p->setId_plan($r->id_plan);
+            $p->setEstado_pago($r->estado_pago);
+            $p->setFecha_pago($r->fecha_pago);
+            return $p;
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ActualizarPago(Pago $p){
+        try{
+            $consulta=$this->pdo->prepare("UPDATE pagos SET
+                id_cliente=?,
+                monto_pagado=?,
+                metodo_pago=?,
+                id_plan=?,
+                estado_pago=?,
+                fecha_pago=?
+                WHERE id_pago=?;");
+            $consulta->execute(array(
+                $p->getId_cliente(),
+                $p->getMonto_pagado(),
+                $p->getMetodo_pago(),
+                $p->getId_plan(),
+                $p->getEstado_pago(),
+                $p->getFecha_pago(),
+                $p->getId_pago()
+                
+
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function EliminarPago($id){
+        try{
+            $consulta=$this->pdo->prepare("DELETE FROM pagos WHERE id_pago=?;");
+            $consulta->execute(array($id));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
 }

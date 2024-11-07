@@ -22,7 +22,7 @@ class Entrenador{
         return $this->id_entrenador;
     }
 
-    public function setId_cliente(int $id){
+    public function setId_entrenador(int $id){
         $this->id_entrenador=$id;
     }
 
@@ -46,7 +46,7 @@ class Entrenador{
         return $this->apellido;
     }
 
-    public function setApellido(int $apellido_){
+    public function setApellido(string $apellido_){
         $this->apellido=$apellido_;
     }
 
@@ -70,15 +70,15 @@ class Entrenador{
         return $this->especialidad;
     }
 
-    public function setEspecialidad(int $especialidad_){
+    public function setEspecialidad(string $especialidad_){
         $this->especialidad=$especialidad_;
     }
 
-    public function getFechacontratacion() : ?Date{
+    public function getFechacontratacion() : ?string{
         return $this->fecha_contratacion;
     }
 
-    public function setFechacontratacion(date $fecha_contratacion_){
+    public function setFechacontratacion(string $fecha_contratacion_){
         $this->fecha_contratacion = $fecha_contratacion_;
     }
 
@@ -86,11 +86,11 @@ class Entrenador{
         return $this->estado;
     }
 
-    public function setEstado(int $estado_){
+    public function setEstado(string $estado_){
         $this->estado=$estado_;
     }
 
-    public function Listar(){
+    public function ListarEntrenador(){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM entrenadores;");
             $consulta->execute();
@@ -99,4 +99,91 @@ class Entrenador{
             die($e->getMessage());
         }
     }
+
+    public function InsertarEntrenador(Entrenador $p){
+        try{
+            $consulta=$this->pdo->prepare("INSERT INTO entrenadores(id_entrenador,dni,nombre,apellido,telefono,mail,especialidad,fecha_contratacion,estado) 
+            VALUES (?,?,?,?,?,?,?,?,?);");
+            $consulta->execute(array(
+                $p->getId_entrenador(),
+                $p->getDni(),
+                $p->getNombre(),
+                $p->getApellido(),
+                $p->getTelefono(),
+                $p->getMail(),
+                $p->getFechacontratacion(),
+                $p->getEspecialidad(),
+                $p->getEstado()
+                
+
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerEntrenador($id){
+        try{
+            $consulta=$this->pdo->prepare("SELECT * FROM entrenadores WHERE id_entrenador = ?;");
+            $consulta->execute(array($id));
+            $r=$consulta->fetch(PDO::FETCH_OBJ);
+            $p=new Entrenador();
+            $p->setId_entrenador($r->id_entrenador);
+            $p->setDni($r->dni);
+            $p->setNombre($r->nombre);
+            $p->setApellido($r->apellido);
+            $p->setTelefono($r->telefono);
+            $p->setMail($r->mail);
+            $p->setEspecialidad($r->especialidad);
+            $p->setFechacontratacion($r->fecha_contratacion	);
+            $p->setEstado($r->estado);
+
+            return $p;
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ActualizarEntrenador(Entrenador $p){
+        try{
+            $consulta=$this->pdo->prepare("UPDATE entrenadores SET
+                dni=?,
+                nombre=?,
+                apellido=?,
+                telefono=?,
+                mail=?,
+                especialidad=?,
+                fecha_contratacion=?,
+                estado=?
+                WHERE id_entrenador=?;");
+            $consulta->execute(array(
+                $p->getDni(),
+                $p->getNombre(),
+                $p->getApellido(),
+                $p->getTelefono(),
+                $p->getMail(),
+                $p->getEspecialidad(),
+                $p->getFechacontratacion(),
+                $p->getEstado(),
+                $p->getId_entrenador()
+                
+
+            ));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function EliminarEntrenador($id){
+        try{
+            $consulta=$this->pdo->prepare("DELETE FROM entrenadores WHERE id_entrenador=?;");
+            $consulta->execute(array($id));
+
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
 }
