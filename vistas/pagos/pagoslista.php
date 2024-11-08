@@ -29,6 +29,7 @@
                   <tr>
                     <th>ID</th>
                     <th>cliente</th>
+                    <th>Apellido</th>
                     <th>monto pagado</th>
                     <th>metodo de pago</th>
                     <th>plan</th>
@@ -41,16 +42,17 @@
                     <?php foreach($this->modelo->ListarPagos() as $r):?>
                   <tr>
                     <td><?=$r->id_pago?></td>
-                    <td><?=$r->id_cliente?></td>
+                    <td><?=$r->nombre_cliente?></td>
+                    <td><?=$r->apellido_cliente?></td>
                     <td><?=$r->monto_pagado?></td>
                     <td><?=$r->metodo_pago?></td>
-                    <td><?=$r->id_plan?></td>
+                    <td><?=$r->nombre_plan?></td>
                     <td><?=$r->estado_pago?></td>
                     <td><?=$r->fecha_pago?></td>
                     <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=pago&a=FormCrearPago&id=<?=$r->id_pago?>">
                           <i class="fas fa-edit"></i>
                         </a>
-                        <a class="btn btn-block bg-gradient-primary btn-sm" href="?c=pago&a=BorrarPago&id=<?=$r->id_pago?>">
+                        <a class="btn btn-block bg-gradient-primary btn-sm btnEliminarPago" data-id="<?=$r->id_pago?>" data-toggle="modal" data-target="#modal-danger">
                           <i class="fas fa-trash"></i>
                         </a></td>
                   </tr>
@@ -62,6 +64,26 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <div class="modal fade" id="modal-danger" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="modalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este Pago? Esta acción no se puede deshacer.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButtonPago">Eliminar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
             </div>
       <!-- /.container-fluid -->
     </section>

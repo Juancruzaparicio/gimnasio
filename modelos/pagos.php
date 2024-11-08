@@ -74,7 +74,11 @@ class Pago{
 
     public function ListarPagos(){
         try{
-            $consulta=$this->pdo->prepare("SELECT * FROM pagos;");
+            $consulta=$this->pdo->prepare("SELECT p.id_pago, c.nombre as nombre_cliente, c.apellido as apellido_cliente, p.monto_pagado, p.metodo_pago, p2.nombre as nombre_plan, 
+                                            p.estado_pago, p.fecha_pago  
+                                            FROM pagos AS p 
+                                            INNER JOIN clientes AS c ON c.id_cliente = p.id_cliente
+                                            INNER JOIN plan_entrenamiento AS p2 ON p2.id_plan = p.id_plan;");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
@@ -152,6 +156,27 @@ class Pago{
             $consulta=$this->pdo->prepare("DELETE FROM pagos WHERE id_pago=?;");
             $consulta->execute(array($id));
 
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPlanes() {
+        try {
+            $consulta = $this->pdo->prepare("SELECT id_plan, nombre FROM plan_entrenamiento;");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ); // Devuelve los planes como un arreglo de objetos
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerClientes(){
+        try{
+            // Consulta que trae el id, nombre y apellido de los clientes
+            $consulta = $this->pdo->prepare("SELECT id_cliente, nombre, apellido FROM clientes;");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
             die($e->getMessage());
         }

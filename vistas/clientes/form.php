@@ -66,8 +66,20 @@
                     <input type="text" class="form-control" name="fecha_inscripcion_cliente" placeholder="Fecha de inscripcion" value="<?=$p->getFecha_inscripcion()?>">
                   </div>
                   <div class="form-group">
-                    <label for="id_plan_cliente">Plan</label>
-                    <input required type="number" class="form-control" name="id_plan_cliente" placeholder="Plan" value="<?=$p->getId_plan()?>">
+                  <label for="id_plan_cliente">Plan</label>
+                    <select required class="form-control" name="id_plan_cliente" id="id_plan_cliente">
+                        <option value="">Seleccione un Plan</option>
+                        <?php
+                        // Crear una instancia de Cliente y obtener los planes
+                        $cliente = new Cliente();
+                        $planes = $cliente->ObtenerPlanes(); // Obtener los planes desde la base de datos
+
+                        // Mostrar cada plan como una opción en el select
+                        foreach ($planes as $plan) {
+                            echo "<option value='" . $plan->id_plan . "' " . ($p->getId_plan() == $plan->id_plan ? "selected" : "") . ">" . $plan->nombre . "</option>";
+                        }
+                        ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="estado_cliente">Estado</label>

@@ -16,6 +16,10 @@
 <script src="assets/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 <script src="assets/plugins/chart.js/Chart.min.js"></script>
+<script src="assets/js/eliminar.js"></script>
+<script src="assets/js/eliminarEntrenador.js"></script>
+<script src="assets/js/eliminarPagos.js"></script>
+<script src="assets/js/eliminarPlan.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <script src="assets/js/demo.js"></script>

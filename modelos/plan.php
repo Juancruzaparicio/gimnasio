@@ -74,7 +74,10 @@ class Plan{
 
     public function ListarPlan(){
         try{
-            $consulta=$this->pdo->prepare("SELECT * FROM plan_entrenamiento;");
+            $consulta=$this->pdo->prepare("SELECT p.id_plan, p.nombre, p.codigo, p.descripcion, p.duracion_semanas, p.cantidadsesiones_semana, e.nombre as nombre_entrenador, 
+                                            e.apellido as apellido_entrenador 
+                                            FROM plan_entrenamiento AS p 
+                                            INNER JOIN entrenadores AS e ON e.id_entrenador = p.id_entrenador;");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
@@ -153,6 +156,17 @@ class Plan{
             $consulta=$this->pdo->prepare("DELETE FROM plan_entrenamiento WHERE id_plan=?;");
             $consulta->execute(array($id));
 
+        }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerEntrenador(){
+        try{
+            // Consulta que trae el id, nombre y apellido de los clientes
+            $consulta = $this->pdo->prepare("SELECT id_entrenador, nombre, apellido FROM entrenadores;");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
             die($e->getMessage());
         }

@@ -54,8 +54,20 @@
                     <input required type="number" class="form-control" name="sesiones" placeholder="sesiones" value="<?=$p->getCantidadsesiones_semana()?>">
                   </div>
                   <div class="form-group">
-                    <label for="entrenador">Entrenador</label>
-                    <input required type="text" class="form-control" name="entrenador" placeholder="entrenador" value="<?=$p->getId_entrenador()?>">
+                  <label for="id_entrenador_plan">Entrenador</label>
+                    <select required class="form-control" name="id_entrenador_plan" id="id_entrenador_plan">
+                        <option value="">Seleccione un Entrenador</option>
+                        <?php
+                        // Crear una instancia de Cliente y obtener los clientes
+                        $entrenador = new Plan();
+                        $entrenadores = $entrenador->ObtenerEntrenador(); // Obtener los clientes desde la base de datos
+
+                        // Mostrar cada cliente como una opción en el select
+                        foreach ($entrenadores as $entrenador) {
+                          echo "<option value='" . $entrenador->id_entrenador . "' " . ($p->getId_entrenador() == $entrenador->id_entrenador ? "selected" : "") . ">" . $entrenador->nombre . " " . $entrenador->apellido . "</option>";
+                        }
+                        ?>
+                    </select>
                   </div>
                 </div>
                 <!-- /.card-body -->

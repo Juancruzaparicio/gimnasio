@@ -185,5 +185,4 @@ class Entrenador{
             die($e->getMessage());
         }
     }
-
 }

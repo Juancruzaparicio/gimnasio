@@ -31,10 +31,10 @@ class PagoControlador{
     public function GuardarPago(){
         $p=new Pago();
         $p->setId_pago(intval($_POST['id']));
-        $p->setId_cliente($_POST['cliente']);
+        $p->setId_cliente($_POST['id_cliente_pago']);
         $p->setMonto_pagado($_POST['monto']);
         $p->setMetodo_pago($_POST['metodo']);
-        $p->setId_plan($_POST['plan']);
+        $p->setId_plan($_POST['id_plan_pago']);
         $p->setEstado_pago($_POST['estado']);
         $p->setFecha_pago($_POST['fecha']);
 

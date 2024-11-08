@@ -34,8 +34,20 @@
                 <div class="card-body">
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="id" value="<?=$p->getId_pago()?>">
-                    <label for="cliente">cliente</label>
-                    <input required type="number" class="form-control" name="cliente" placeholder="cliente" value="<?=$p->getId_cliente()?>">
+                    <label for="id_cliente_pago">Cliente</label>
+                    <select required class="form-control" name="id_cliente_pago" id="id_cliente_pago">
+                        <option value="">Seleccione un Cliente</option>
+                        <?php
+                        // Crear una instancia de Cliente y obtener los clientes
+                        $cliente = new Pago();
+                        $clientes = $cliente->ObtenerClientes(); // Obtener los clientes desde la base de datos
+
+                        // Mostrar cada cliente como una opción en el select
+                        foreach ($clientes as $cliente) {
+                          echo "<option value='" . $cliente->id_cliente . "' " . ($p->getId_cliente() == $cliente->id_cliente ? "selected" : "") . ">" . $cliente->nombre . " " . $cliente->apellido . "</option>";
+                        }
+                        ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="monto">Monto</label>
@@ -46,8 +58,20 @@
                     <input required type="text" class="form-control" name="metodo" placeholder="metodo" value="<?=$p->getMetodo_pago()?>">
                   </div>
                   <div class="form-group">
-                    <label for="plan">Plan</label>
-                    <input required type="number" class="form-control" name="plan" placeholder="plan" value="<?=$p->getId_plan()?>">
+                  <label for="id_plan_pago">Cliente</label>
+                  <select required class="form-control" name="id_plan_pago" id="id_plan_pago">
+                        <option value="">Seleccione un Plan</option>
+                        <?php
+                        // Crear una instancia de Cliente y obtener los planes
+                        $pago = new Pago();
+                        $planes = $pago->ObtenerPlanes(); // Obtener los planes desde la base de datos
+
+                        // Mostrar cada plan como una opción en el select
+                        foreach ($planes as $plan) {
+                            echo "<option value='" . $plan->id_plan . "' " . ($p->getId_plan() == $plan->id_plan ? "selected" : "") . ">" . $plan->nombre . "</option>";
+                        }
+                        ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label for="estado">Estado</label>

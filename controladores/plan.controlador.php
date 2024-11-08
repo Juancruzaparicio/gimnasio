@@ -36,7 +36,7 @@ class PlanControlador{
         $p->setDescripcion($_POST['descripcion_plan']);
         $p->setDuracion_semanas($_POST['duracion']);
         $p->setCantidadsesiones_semana($_POST['sesiones']);
-        $p->setId_entrenador($_POST['entrenador']);
+        $p->setId_entrenador($_POST['id_entrenador_plan']);
 
         $p->getId_plan() > 0 ?
         $this->modelo->ActualizarPlan($p) :

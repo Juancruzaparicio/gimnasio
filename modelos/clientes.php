@@ -118,7 +118,11 @@ class Cliente{
 
     public function Listar(){
         try{
-            $consulta=$this->pdo->prepare("SELECT * FROM clientes;");
+            $consulta=$this->pdo->prepare("SELECT c.id_cliente, c.dni, c.nombre, c.apellido, c.telefono, 
+                                            c.mail, c.fecha_nacimiento, c.direccion, 
+                                            c.fecha_inscripcion, p.nombre AS nombre_plan, c.estado 
+                                         FROM clientes AS c 
+                                         INNER JOIN plan_entrenamiento AS p ON p.id_plan = c.id_plan;");
             $consulta->execute();
             return $consulta->fetchAll(PDO::FETCH_OBJ);
         }catch(Exception $e){
@@ -216,6 +220,16 @@ class Cliente{
             $consulta->execute(array($id));
 
         }catch(Exception $e){
+            die($e->getMessage());
+        }
+    }
+
+    public function ObtenerPlanes() {
+        try {
+            $consulta = $this->pdo->prepare("SELECT id_plan, nombre FROM plan_entrenamiento;");
+            $consulta->execute();
+            return $consulta->fetchAll(PDO::FETCH_OBJ); // Devuelve los planes como un arreglo de objetos
+        } catch (Exception $e) {
             die($e->getMessage());
         }
     }

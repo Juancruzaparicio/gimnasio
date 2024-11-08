@@ -54,7 +54,7 @@
                     <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=entrenador&a=FormCrearEntrenador&id=<?=$r->id_entrenador?>">
                           <i class="fas fa-edit"></i>
                         </a>
-                        <a class="btn btn-block bg-gradient-primary btn-sm" href="?c=entrenador&a=BorrarEntrenador&id=<?=$r->id_entrenador?>">
+                        <a class="btn btn-block bg-gradient-primary btn-sm btnEliminarEntrenador" data-id="<?=$r->id_entrenador?>" data-toggle="modal" data-target="#modal-danger">
                           <i class="fas fa-trash"></i>
                         </a></td>
                   </tr>
@@ -66,6 +66,26 @@
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <div class="modal fade" id="modal-danger" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="modalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este Entrenador? Esta acción no se puede deshacer.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteButtonEntrenador">Eliminar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
             </div>
       <!-- /.container-fluid -->
     </section>
