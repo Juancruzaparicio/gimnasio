@@ -10,16 +10,17 @@ class EntrenadorControlador{
     }
 
     public function Inicio(){
+        $entrenador = $this->modelo->mdlListarEntrenador();
         require_once "vistas/encabezado.php";
         require_once "vistas/entrenadores/entrenadoreslista.php";
         require_once "vistas/pie.php";
     }
 
-    public function FormCrearEntrenador(){
+    public function ctrFormCrearEntrenador(){
         $titulo='Registrar';
         $p= new Entrenador();
         if(isset($_GET['id'])){
-            $p=$this->modelo->ObtenerEntrenador($_GET['id']);
+            $p=$this->modelo->mdlObtenerEntrenador($_GET['id']);
             $titulo='Modificar';
         }
 
@@ -28,7 +29,7 @@ class EntrenadorControlador{
         require_once "vistas/pie.php";
     }
 
-    public function GuardarEntrenador(){
+    public function ctrGuardarEntrenador(){
         $p=new Entrenador();
         $p->setId_entrenador(intval($_POST['id']));
         $p->setDni($_POST['dni_entrenador']);
@@ -41,14 +42,14 @@ class EntrenadorControlador{
         $p->setEstado($_POST['estado_entrenador']);
 
         $p->getId_entrenador() > 0 ?
-        $this->modelo->ActualizarEntrenador($p) :
-        $this->modelo->InsertarEntrenador($p);
+        $this->modelo->mdlActualizarEntrenador($p) :
+        $this->modelo->mdlInsertarEntrenador($p);
 
         header("location:?c=entrenador");
     }
 
-    public function BorrarEntrenador(){
-        $this->modelo->EliminarEntrenador($_GET['id']);
+    public function ctrBorrarEntrenador(){
+        $this->modelo->mdlEliminarEntrenador($_GET['id']);
         header("location:?c=entrenador");
     }
 }

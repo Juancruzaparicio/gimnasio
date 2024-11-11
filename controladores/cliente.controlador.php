@@ -11,25 +11,27 @@ class ClienteControlador{
     }
 
     public function Inicio(){
+        $cliente = $this->modelo->mdlListar();
         require_once "vistas/encabezado.php";
         require_once "vistas/clientes/index.php";
         require_once "vistas/pie.php";
     }
 
-    public function FormCrearClientes(){
+    public function ctrFormCrearClientes(){
         $titulo='Registrar';
         $p= new Cliente();
         if(isset($_GET['id'])){
-            $p=$this->modelo->Obtener($_GET['id']);
+            $p=$this->modelo->mdlObtener($_GET['id']);
             $titulo='Modificar';
         }
+        $planes = $this->modelo->mdlObtenerPlanes();
 
         require_once "vistas/encabezado.php";
         require_once "vistas/clientes/form.php";
         require_once "vistas/pie.php";
     }
 
-    public function GuardarCliente(){
+    public function ctrGuardarCliente(){
         $p=new Cliente();
         $p->setId_cliente(intval($_POST['id']));
         $p->setDni($_POST['dni_cliente']);
@@ -44,14 +46,14 @@ class ClienteControlador{
         $p->setEstado($_POST['estado_cliente']);
 
         $p->getId_cliente() > 0 ?
-        $this->modelo->ActualizarCliente($p) :
-        $this->modelo->InsertarCliente($p);
+        $this->modelo->mdlActualizarCliente($p) :
+        $this->modelo->mdlInsertarCliente($p);
 
         header("location:?c=cliente");
     }
 
-    public function BorrarCliente(){
-        $this->modelo->EliminarCliente($_GET['id']);
+    public function ctrBorrarCliente(){
+        $this->modelo->mdlEliminarCliente($_GET['id']);
         header("location:?c=cliente");
     }
 }

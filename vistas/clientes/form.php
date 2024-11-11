@@ -30,7 +30,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="?c=cliente&a=GuardarCliente">
+              <form method="POST" action="?c=cliente&a=ctrGuardarCliente">
                 <div class="card-body">
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="id" value="<?=$p->getId_cliente()?>">
@@ -69,15 +69,11 @@
                   <label for="id_plan_cliente">Plan</label>
                     <select required class="form-control" name="id_plan_cliente" id="id_plan_cliente">
                         <option value="">Seleccione un Plan</option>
-                        <?php
-                        // Crear una instancia de Cliente y obtener los planes
-                        $cliente = new Cliente();
-                        $planes = $cliente->ObtenerPlanes(); // Obtener los planes desde la base de datos
-
-                        // Mostrar cada plan como una opción en el select
-                        foreach ($planes as $plan) {
-                            echo "<option value='" . $plan->id_plan . "' " . ($p->getId_plan() == $plan->id_plan ? "selected" : "") . ">" . $plan->nombre . "</option>";
-                        }
+                        <?php foreach ($planes as $plan): ?>
+                            <option value="<?= $plan->id_plan ?>" <?= $p->getId_plan() == $plan->id_plan ? "selected" : "" ?>>
+                                <?= $plan->nombre ?>
+                            </option>
+                        <?php endforeach; 
                         ?>
                     </select>
                   </div>

@@ -29,7 +29,6 @@
                   <tr>
                     <th>ID</th>
                     <th>cliente</th>
-                    <th>Apellido</th>
                     <th>monto pagado</th>
                     <th>metodo de pago</th>
                     <th>plan</th>
@@ -39,17 +38,16 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($this->modelo->ListarPagos() as $r):?>
+                    <?php foreach($pagos as $r):?>
                   <tr>
                     <td><?=$r->id_pago?></td>
-                    <td><?=$r->nombre_cliente?></td>
-                    <td><?=$r->apellido_cliente?></td>
+                    <td><?=$r->nombre_cliente?>  <?=$r->apellido_cliente?></td>
                     <td><?=$r->monto_pagado?></td>
                     <td><?=$r->metodo_pago?></td>
                     <td><?=$r->nombre_plan?></td>
                     <td><?=$r->estado_pago?></td>
                     <td><?=$r->fecha_pago?></td>
-                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=pago&a=FormCrearPago&id=<?=$r->id_pago?>">
+                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=pago&a=ctrFormCrearPago&id=<?=$r->id_pago?>">
                           <i class="fas fa-edit"></i>
                         </a>
                         <a class="btn btn-block bg-gradient-primary btn-sm btnEliminarPago" data-id="<?=$r->id_pago?>" data-toggle="modal" data-target="#modal-danger">
@@ -57,7 +55,7 @@
                         </a></td>
                   </tr>
                   <?php endforeach;?>
-                  <a class="btn btn-app" href="?c=pago&a=FormCrearPago">
+                  <a class="btn btn-app" href="?c=pago&a=ctrFormCrearPago">
                   <i class="fas fa-plus"></i> Agregar</a>
                 </table>
               </div>

@@ -14,6 +14,6 @@ $(document).ready(function () {
   
     // Confirmar eliminación y redirigir
     $('#confirmDeleteButtonPago').on('click', function () {
-      window.location.href = "?c=pago&a=BorrarPago&id=" + pagoId;
+      window.location.href = "?c=pago&a=ctrBorrarPago&id=" + pagoId;
     });
   });

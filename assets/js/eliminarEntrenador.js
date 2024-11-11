@@ -14,6 +14,6 @@ $(document).ready(function () {
   
     // Confirmar eliminación y redirigir
     $('#confirmDeleteButtonEntrenador').on('click', function () {
-      window.location.href = "?c=entrenador&a=BorrarEntrenador&id=" + entrenadorId;
+      window.location.href = "?c=entrenador&a=ctrBorrarEntrenador&id=" + entrenadorId;
     });
   });

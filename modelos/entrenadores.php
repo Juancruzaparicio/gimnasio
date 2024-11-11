@@ -90,7 +90,7 @@ class Entrenador{
         $this->estado=$estado_;
     }
 
-    public function ListarEntrenador(){
+    public function mdlListarEntrenador(){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM entrenadores;");
             $consulta->execute();
@@ -100,7 +100,7 @@ class Entrenador{
         }
     }
 
-    public function InsertarEntrenador(Entrenador $p){
+    public function mdlInsertarEntrenador(Entrenador $p){
         try{
             $consulta=$this->pdo->prepare("INSERT INTO entrenadores(id_entrenador,dni,nombre,apellido,telefono,mail,especialidad,fecha_contratacion,estado) 
             VALUES (?,?,?,?,?,?,?,?,?);");
@@ -111,8 +111,8 @@ class Entrenador{
                 $p->getApellido(),
                 $p->getTelefono(),
                 $p->getMail(),
-                $p->getFechacontratacion(),
                 $p->getEspecialidad(),
+                $p->getFechacontratacion(),
                 $p->getEstado()
                 
 
@@ -123,7 +123,7 @@ class Entrenador{
         }
     }
 
-    public function ObtenerEntrenador($id){
+    public function mdlObtenerEntrenador($id){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM entrenadores WHERE id_entrenador = ?;");
             $consulta->execute(array($id));
@@ -145,7 +145,7 @@ class Entrenador{
         }
     }
 
-    public function ActualizarEntrenador(Entrenador $p){
+    public function mdlActualizarEntrenador(Entrenador $p){
         try{
             $consulta=$this->pdo->prepare("UPDATE entrenadores SET
                 dni=?,
@@ -176,7 +176,7 @@ class Entrenador{
         }
     }
 
-    public function EliminarEntrenador($id){
+    public function mdlEliminarEntrenador($id){
         try{
             $consulta=$this->pdo->prepare("DELETE FROM entrenadores WHERE id_entrenador=?;");
             $consulta->execute(array($id));

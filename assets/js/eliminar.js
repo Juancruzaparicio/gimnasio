@@ -14,6 +14,6 @@ $(document).ready(function () {
 
   // Confirmar eliminación y redirigir
   $('#confirmDeleteButton').on('click', function () {
-    window.location.href = "?c=cliente&a=BorrarCliente&id=" + clienteId;
+    window.location.href = "?c=cliente&a=ctrBorrarCliente&id=" + clienteId;
   });
 });

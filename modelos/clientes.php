@@ -116,7 +116,7 @@ class Cliente{
         $this->estado=$estado_;
     }
 
-    public function Listar(){
+    public function mdlListar(){
         try{
             $consulta=$this->pdo->prepare("SELECT c.id_cliente, c.dni, c.nombre, c.apellido, c.telefono, 
                                             c.mail, c.fecha_nacimiento, c.direccion, 
@@ -130,7 +130,7 @@ class Cliente{
         }
     }
 
-    public function InsertarCliente(Cliente $p){
+    public function mdlInsertarCliente(Cliente $p){
         try{
             $consulta=$this->pdo->prepare("INSERT INTO clientes(id_cliente,dni,nombre,apellido,telefono,mail,fecha_nacimiento,direccion,fecha_inscripcion,id_plan,estado) 
             VALUES (?,?,?,?,?,?,?,?,?,?,?);");
@@ -155,7 +155,7 @@ class Cliente{
         }
     }
 
-    public function Obtener($id){
+    public function mdlObtener($id){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM clientes WHERE id_cliente = ?;");
             $consulta->execute(array($id));
@@ -179,7 +179,7 @@ class Cliente{
         }
     }
 
-    public function ActualizarCliente(Cliente $p){
+    public function mdlActualizarCliente(Cliente $p){
         try{
             $consulta=$this->pdo->prepare("UPDATE clientes SET
                 dni=?,
@@ -214,7 +214,7 @@ class Cliente{
         }
     }
 
-    public function EliminarCliente($id){
+    public function mdlEliminarCliente($id){
         try{
             $consulta=$this->pdo->prepare("DELETE FROM clientes WHERE id_cliente=?;");
             $consulta->execute(array($id));
@@ -224,7 +224,7 @@ class Cliente{
         }
     }
 
-    public function ObtenerPlanes() {
+    public function mdlObtenerPlanes() {
         try {
             $consulta = $this->pdo->prepare("SELECT id_plan, nombre FROM plan_entrenamiento;");
             $consulta->execute();

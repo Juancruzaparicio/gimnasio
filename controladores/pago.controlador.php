@@ -10,25 +10,28 @@ class PagoControlador{
     }
 
     public function Inicio(){
+        $pagos = $this->modelo->mdlListarPagos();
         require_once "vistas/encabezado.php";
         require_once "vistas/pagos/pagoslista.php";
         require_once "vistas/pie.php";
     }
 
-    public function FormCrearPago(){
+    public function ctrFormCrearPago(){
         $titulo='Registrar';
         $p= new Pago();
         if(isset($_GET['id'])){
-            $p=$this->modelo->ObtenerPago($_GET['id']);
+            $p=$this->modelo->mdlObtenerPago($_GET['id']);
             $titulo='Modificar';
         }
+        $clientes = $this->modelo->mdlObtenerClientes();
+        $planes = $this->modelo->mdlObtenerPlanes();
 
         require_once "vistas/encabezado.php";
         require_once "vistas/pagos/form.php";
         require_once "vistas/pie.php";
     }
 
-    public function GuardarPago(){
+    public function ctrGuardarPago(){
         $p=new Pago();
         $p->setId_pago(intval($_POST['id']));
         $p->setId_cliente($_POST['id_cliente_pago']);
@@ -39,14 +42,14 @@ class PagoControlador{
         $p->setFecha_pago($_POST['fecha']);
 
         $p->getId_Pago() > 0 ?
-        $this->modelo->ActualizarPago($p) :
-        $this->modelo->InsertarPago($p);
+        $this->modelo->mdlActualizarPago($p) :
+        $this->modelo->mdlInsertarPago($p);
 
         header("location:?c=pago");
     }
 
-    public function BorrarPago(){
-        $this->modelo->EliminarPago($_GET['id']);
+    public function ctrBorrarPago(){
+        $this->modelo->mdlEliminarPago($_GET['id']);
         header("location:?c=pago");
     }
 }

@@ -30,7 +30,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="?c=plan&a=GuardarPlan">
+              <form method="POST" action="?c=plan&a=ctrGuardarPlan">
                 <div class="card-body">
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="id" value="<?=$p->getId_plan()?>">
@@ -57,16 +57,11 @@
                   <label for="id_entrenador_plan">Entrenador</label>
                     <select required class="form-control" name="id_entrenador_plan" id="id_entrenador_plan">
                         <option value="">Seleccione un Entrenador</option>
-                        <?php
-                        // Crear una instancia de Cliente y obtener los clientes
-                        $entrenador = new Plan();
-                        $entrenadores = $entrenador->ObtenerEntrenador(); // Obtener los clientes desde la base de datos
-
-                        // Mostrar cada cliente como una opción en el select
-                        foreach ($entrenadores as $entrenador) {
-                          echo "<option value='" . $entrenador->id_entrenador . "' " . ($p->getId_entrenador() == $entrenador->id_entrenador ? "selected" : "") . ">" . $entrenador->nombre . " " . $entrenador->apellido . "</option>";
-                        }
-                        ?>
+                        <?php foreach ($entrenadores as $entrenador): ?>
+                            <option value="<?= $entrenador->id_entrenador ?>" <?= $p->getId_entrenador() == $entrenador->id_entrenador ? "selected" : "" ?>>
+                                <?= $entrenador->nombre . ' ' . $entrenador->apellido ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                   </div>
                 </div>

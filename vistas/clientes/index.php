@@ -42,7 +42,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($this->modelo->Listar() as $r):?>
+                    <?php foreach($cliente as $r):?>
                   <tr>
                     <td><?=$r->id_cliente?></td>
                     <td><?=$r->dni?></td>
@@ -55,7 +55,7 @@
                     <td><?=$r->fecha_inscripcion?></td>
                     <td><?=$r->nombre_plan?></td>
                     <td><?=$r->estado?></td>
-                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=cliente&a=FormCrearClientes&id=<?=$r->id_cliente?>">
+                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=cliente&a=ctrFormCrearClientes&id=<?=$r->id_cliente?>">
                           <i class="fas fa-edit"></i>
                         </a>
                         <a class="btn btn-block bg-gradient-primary btn-sm btnEliminarCliente" data-id="<?=$r->id_cliente?>" data-toggle="modal" data-target="#modal-danger">
@@ -63,7 +63,7 @@
                         </a>
                   </tr>
                   <?php endforeach;?>
-                  <a class="btn btn-app" href="?c=cliente&a=FormCrearClientes">
+                  <a class="btn btn-app" href="?c=cliente&a=ctrFormCrearClientes">
                   <i class="fas fa-plus"></i> Agregar</a>
                 </table>
               </div>

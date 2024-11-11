@@ -33,13 +33,12 @@
                     <th>descripcion</th>
                     <th>duracion</th>
                     <th>cantidad de sesiones</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
+                    <th>Entrenador</th>
                     <th>Acciones</th>
                   </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($this->modelo->ListarPlan() as $r):?>
+                    <?php foreach($plan as $r):?>
                   <tr>
                     <td><?=$r->id_plan?></td>
                     <td><?=$r->nombre?></td>
@@ -47,9 +46,8 @@
                     <td><?=$r->descripcion?></td>
                     <td><?=$r->duracion_semanas?> semanas</td>
                     <td><?=$r->cantidadsesiones_semana?> por semana</td>
-                    <td><?=$r->nombre_entrenador?></td>
-                    <td><?=$r->apellido_entrenador?></td>
-                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=plan&a=FormCrearPlan&id=<?=$r->id_plan?>">
+                    <td><?=$r->nombre_entrenador?>  <?=$r->apellido_entrenador?></td>
+                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=plan&a=ctrFormCrearPlan&id=<?=$r->id_plan?>">
                           <i class="fas fa-edit"></i>
                         </a>
                         <a class="btn btn-block bg-gradient-primary btn-sm btnEliminarPlan" data-id="<?=$r->id_plan?>" data-toggle="modal" data-target="#modal-danger">
@@ -57,7 +55,7 @@
                         </a></td>
                   </tr>
                   <?php endforeach;?>
-                  <a class="btn btn-app" href="?c=plan&a=FormCrearPlan">
+                  <a class="btn btn-app" href="?c=plan&a=ctrFormCrearPlan">
                   <i class="fas fa-plus"></i> Agregar</a>
                 </table>
               </div>

@@ -30,7 +30,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="POST" action="?c=entrenador&a=GuardarEntrenador">
+              <form method="POST" action="?c=entrenador&a=ctrGuardarEntrenador">
                 <div class="card-body">
                   <div class="form-group">
                     <input type="hidden" class="form-control" name="id" value="<?=$p->getId_entrenador()?>">

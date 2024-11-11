@@ -72,7 +72,7 @@ class Pago{
         $this->fecha_pago=$fecha;
     }
 
-    public function ListarPagos(){
+    public function mdlListarPagos(){
         try{
             $consulta=$this->pdo->prepare("SELECT p.id_pago, c.nombre as nombre_cliente, c.apellido as apellido_cliente, p.monto_pagado, p.metodo_pago, p2.nombre as nombre_plan, 
                                             p.estado_pago, p.fecha_pago  
@@ -86,7 +86,7 @@ class Pago{
         }
     }
 
-    public function InsertarPago(pago $p){
+    public function mdlInsertarPago(pago $p){
         try{
             $consulta=$this->pdo->prepare("INSERT INTO pagos(id_pago,id_cliente,monto_pagado,metodo_pago,id_plan,estado_pago,fecha_pago) 
             VALUES (?,?,?,?,?,?,?);");
@@ -105,7 +105,7 @@ class Pago{
         }
     }
 
-    public function ObtenerPago($id){
+    public function mdlObtenerPago($id){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM pagos WHERE id_pago = ?;");
             $consulta->execute(array($id));
@@ -124,7 +124,7 @@ class Pago{
         }
     }
 
-    public function ActualizarPago(Pago $p){
+    public function mdlActualizarPago(Pago $p){
         try{
             $consulta=$this->pdo->prepare("UPDATE pagos SET
                 id_cliente=?,
@@ -151,7 +151,7 @@ class Pago{
         }
     }
 
-    public function EliminarPago($id){
+    public function mdlEliminarPago($id){
         try{
             $consulta=$this->pdo->prepare("DELETE FROM pagos WHERE id_pago=?;");
             $consulta->execute(array($id));
@@ -161,7 +161,7 @@ class Pago{
         }
     }
 
-    public function ObtenerPlanes() {
+    public function mdlObtenerPlanes() {
         try {
             $consulta = $this->pdo->prepare("SELECT id_plan, nombre FROM plan_entrenamiento;");
             $consulta->execute();
@@ -171,7 +171,7 @@ class Pago{
         }
     }
 
-    public function ObtenerClientes(){
+    public function mdlObtenerClientes(){
         try{
             // Consulta que trae el id, nombre y apellido de los clientes
             $consulta = $this->pdo->prepare("SELECT id_cliente, nombre, apellido FROM clientes;");

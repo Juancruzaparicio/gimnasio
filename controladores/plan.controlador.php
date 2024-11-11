@@ -10,25 +10,27 @@ class PlanControlador{
     }
 
     public function Inicio(){
+        $plan = $this->modelo->mdlListarPlan();
         require_once "vistas/encabezado.php";
         require_once "vistas/plan/planlista.php";
         require_once "vistas/pie.php";
     }
 
-    public function FormCrearPlan(){
+    public function ctrFormCrearPlan(){
         $titulo='Registrar';
         $p= new Plan();
         if(isset($_GET['id'])){
-            $p=$this->modelo->ObtenerPlan($_GET['id']);
+            $p=$this->modelo->mdlObtenerPlan($_GET['id']);
             $titulo='Modificar';
         }
+        $entrenadores = $this->modelo->mdlObtenerEntrenador();
 
         require_once "vistas/encabezado.php";
         require_once "vistas/plan/form.php";
         require_once "vistas/pie.php";
     }
 
-    public function GuardarPlan(){
+    public function ctrGuardarPlan(){
         $p=new Plan();
         $p->setId_plan(intval($_POST['id']));
         $p->setNombre($_POST['nombre_plan']);
@@ -39,14 +41,14 @@ class PlanControlador{
         $p->setId_entrenador($_POST['id_entrenador_plan']);
 
         $p->getId_plan() > 0 ?
-        $this->modelo->ActualizarPlan($p) :
-        $this->modelo->InsertarPlan($p);
+        $this->modelo->mdlActualizarPlan($p) :
+        $this->modelo->mdlInsertarPlan($p);
 
         header("location:?c=plan");
     }
 
-    public function BorrarPlan(){
-        $this->modelo->EliminarPlan($_GET['id']);
+    public function ctrBorrarPlan(){
+        $this->modelo->mdlEliminarPlan($_GET['id']);
         header("location:?c=plan");
     }
 }

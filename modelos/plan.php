@@ -72,7 +72,7 @@ class Plan{
         $this->id_entrenador=$entrenador;
     }
 
-    public function ListarPlan(){
+    public function mdlListarPlan(){
         try{
             $consulta=$this->pdo->prepare("SELECT p.id_plan, p.nombre, p.codigo, p.descripcion, p.duracion_semanas, p.cantidadsesiones_semana, e.nombre as nombre_entrenador, 
                                             e.apellido as apellido_entrenador 
@@ -85,7 +85,7 @@ class Plan{
         }
     }
 
-    public function InsertarPlan(Plan $p){
+    public function mdlInsertarPlan(Plan $p){
         try{
             $consulta=$this->pdo->prepare("INSERT INTO plan_entrenamiento(id_plan,nombre,codigo,descripcion,duracion_semanas,cantidadsesiones_semana,id_entrenador) 
             VALUES (?,?,?,?,?,?,?);");
@@ -104,7 +104,7 @@ class Plan{
         }
     }
 
-    public function ObtenerPlan($id){
+    public function mdlObtenerPlan($id){
         try{
             $consulta=$this->pdo->prepare("SELECT * FROM plan_entrenamiento WHERE id_plan = ?;");
             $consulta->execute(array($id));
@@ -124,7 +124,7 @@ class Plan{
         }
     }
 
-    public function ActualizarPlan(Plan $p){
+    public function mdlActualizarPlan(Plan $p){
         try{
             $consulta=$this->pdo->prepare("UPDATE plan_entrenamiento SET
                 nombre=?,
@@ -151,7 +151,7 @@ class Plan{
         }
     }
 
-    public function EliminarPlan($id){
+    public function mdlEliminarPlan($id){
         try{
             $consulta=$this->pdo->prepare("DELETE FROM plan_entrenamiento WHERE id_plan=?;");
             $consulta->execute(array($id));
@@ -161,7 +161,7 @@ class Plan{
         }
     }
 
-    public function ObtenerEntrenador(){
+    public function mdlObtenerEntrenador(){
         try{
             // Consulta que trae el id, nombre y apellido de los clientes
             $consulta = $this->pdo->prepare("SELECT id_entrenador, nombre, apellido FROM entrenadores;");

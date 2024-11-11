@@ -14,6 +14,6 @@ $(document).ready(function () {
   
     // Confirmar eliminación y redirigir
     $('#confirmDeleteButtonPlan').on('click', function () {
-      window.location.href = "?c=plan&a=BorrarPlan&id=" + planId;
+      window.location.href = "?c=plan&a=ctrBorrarPlan&id=" + planId;
     });
   });

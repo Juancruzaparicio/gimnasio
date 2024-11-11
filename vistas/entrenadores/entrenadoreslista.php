@@ -40,7 +40,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <?php foreach($this->modelo->ListarEntrenador() as $r):?>
+                    <?php foreach($entrenador as $r):?>
                   <tr>
                     <td><?=$r->id_entrenador?></td>
                     <td><?=$r->dni?></td>
@@ -51,7 +51,7 @@
                     <td><?=$r->especialidad?></td>
                     <td><?=$r->fecha_contratacion?></td>
                     <td><?=$r->estado?></td>
-                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=entrenador&a=FormCrearEntrenador&id=<?=$r->id_entrenador?>">
+                    <td><a class="btn btn-block bg-gradient-primary btn-sm" href="?c=entrenador&a=ctrFormCrearEntrenador&id=<?=$r->id_entrenador?>">
                           <i class="fas fa-edit"></i>
                         </a>
                         <a class="btn btn-block bg-gradient-primary btn-sm btnEliminarEntrenador" data-id="<?=$r->id_entrenador?>" data-toggle="modal" data-target="#modal-danger">
@@ -59,7 +59,7 @@
                         </a></td>
                   </tr>
                   <?php endforeach;?>
-                  <a class="btn btn-app" href="?c=entrenador&a=FormCrearEntrenador">
+                  <a class="btn btn-app" href="?c=entrenador&a=ctrFormCrearEntrenador">
                   <i class="fas fa-plus"></i> Agregar</a>
                 </table>
               </div>
